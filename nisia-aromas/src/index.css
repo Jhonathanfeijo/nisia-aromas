@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    font-family: "Exo", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal
+}
+
+input {
+    border: 0px solid #ccc; /* Borda padrão */
+    outline: none; /* Remove o contorno padrão do navegador */
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-10%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.slide-in{
+    animation: slideIn 1s ease forwards;
+}
+
