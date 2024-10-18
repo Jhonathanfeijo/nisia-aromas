@@ -24,7 +24,7 @@ const Login = () => {
     }
 
     return (<>
-        <div className="inset-0 bg-primary/40 w-screen h-screen flex items-center justify-center">
+        <div className="inset-0 bg-primary/80 w-screen h-screen flex items-center justify-center">
             <div className="w-[350px] h-[400px] max-w-full max-h-full bg-white text-secondary select-none bg-opacity-90 rounded-lg drop-shadow-lg shadow-lg flex flex-col items-center justify-center px-2 py-4 slide-in">
                 <h2 className="text-3xl font-medium mt-2">Nisia</h2>
                 <h3 className="text-lg">Aromas e Essências</h3>
