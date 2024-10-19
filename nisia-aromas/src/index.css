@@ -16,7 +16,7 @@ input {
 
 @keyframes slideIn {
     from {
-        transform: translateX(-10%);
+        transform: translateX(-15%);
         opacity: 0;
     }
     to {
@@ -26,6 +26,5 @@ input {
 }
 
 .slide-in{
-    animation: slideIn 1s ease forwards;
+    animation: slideIn 1s ease-in-out forwards;
 }
-

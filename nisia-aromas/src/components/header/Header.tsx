@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import logo from '../../assets/logo/Nisia.svg'
 
 const Header = ({
   setHeaderOption,
@@ -23,12 +24,12 @@ const Header = ({
   };
 
   return (
-    <header className="bg-primary text-white select-none w-full shadow rounded-b drop-shadow-lg min-h-[50px] flex flex-row justify-between items-center max-[340px]:px-2 px-5 md:px-[5rem] xl:px-[14rem] 2xl:px-[22rem]">
+    <header className="bg-primary text-white select-none w-full shadow rounded-b drop-shadow-lg min-h-[50px] flex flex-row justify-between items-center max-[340px]:px-2 px-5 md:px-[5rem] xl:px-[14rem] 2xl:px-[450px]">
       <div
         onClick={() => setHeaderOption("home")}
         className="text-2xl font-medium flex flex-col items-center hover:cursor-pointer text-center hover:opacity-80"
       >
-        <span>Nisia</span>
+        <img className="w-24" src={logo} alt="" />
         <span className="text-sm">Aromas e Essências</span>
       </div>
       <div className="flex flex-row gap-5 lg:gap-10 items-center justify-between relative">
