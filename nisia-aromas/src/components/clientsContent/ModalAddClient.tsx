@@ -35,7 +35,7 @@ const ModalAddClient = ({ setIsOpen, zIndex }: { setIsOpen: React.Dispatch<React
     return (
         <>
             <Modal zIndex={zIndex}>
-                <div className={`bg-white w-[700px] max-w-full rounded text-primary shadow-lg drop-shadow-lg p-3 flex flex-col`}>
+                <div className={`bg-white w-[700px] max-w-full rounded text-primary slide-in shadow-lg drop-shadow-lg p-3 flex flex-col`}>
                     <h2 className="text-2xl font-medium my-2">Novo cliente</h2>
                     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full items-center" action="">
                         <div className="flex flex-row flex-wrap w-full gap-3">
