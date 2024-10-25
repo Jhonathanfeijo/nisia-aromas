@@ -25,7 +25,7 @@ const Clients = () => {
   const [statusData, setStatusData] = useState<string>("loading");
   const [clients, setClients] = useState<IClient[]>();
 
-  const headers : (keyof IClient)[] = ["nomeCliente", "email"];
+  const headers: (keyof IClient)[] = ["nomeCliente", "telefone"];
 
   useEffect(() => {
     getClients();
@@ -83,21 +83,13 @@ const Clients = () => {
               <div className="flex-1 w-full">
                 <table className="w-full shadow text-secondary">
                   <thead className="w-full bg-primary text-white rounded overflow-hidden">
-                    <th>
-                      <td className="py-2"></td>
-                    </th>
-                    <th>
-                      <td className="py-2">Nome</td>
-                    </th>
-                    <th>
-                      <td className="py-2">Email</td>
-                    </th>
-                    <th>
-                      <td className="py-2">Avaliação</td>
-                    </th>
-                    <th>
-                      <td className="py-2"></td>
-                    </th>
+                    <tr>
+                      <th></th>
+                      <th className="py-2">Nome</th>
+                      <th className="py-2">Telefone</th>
+                      <th className="py-2">Avaliação</th>
+                      <th></th>
+                    </tr>
                   </thead>
                   <tbody>
                     {clients && (
@@ -105,18 +97,15 @@ const Clients = () => {
                         {clients.length > 0 && (
                           <>
                             {clients.map((client: IClient, index: number) => {
+                              console.log(client)
                               return (
-                                <tr key={index}>
+                                <tr key={client.id}>
                                   <td className="p-3">
                                     <span>{index + 1}</span>
                                   </td>
-                                  {headers.map((header) => {
-                                    return (
-                                      <td>
-                                        {client[header as keyof IClient] as string | number}
-                                      </td>
-                                    );
-                                  })}
+                                  {headers.map((header) => (
+                                    <td key={header}><span>{client[header] as string | number}</span></td>
+                                  ))}
                                   <td className="flex items-center justify-end p-2">
                                     <button className="bg-primary text-white px-2 py-1 rounded hover:opacity-80">
                                       <UserRoundPen />
@@ -131,13 +120,15 @@ const Clients = () => {
                     )}
                   </tbody>
                 </table>
-                    {clients?.length === 0 && (
-                        <>
-                        <div className="p-2">
-                            <span className="p-2 w-full font-medium text-primary text-lg">Não há clientes cadastrados</span>
-                        </div>
-                        </>
-                    )}
+                {clients?.length === 0 && (
+                  <>
+                    <div className="p-2">
+                      <span className="p-2 w-full font-medium text-primary text-lg">
+                        Não há clientes cadastrados
+                      </span>
+                    </div>
+                  </>
+                )}
               </div>
             </>
           )}
