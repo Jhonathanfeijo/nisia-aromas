@@ -24,7 +24,7 @@ const Header = ({
   };
 
   return (
-    <header className="bg-primary text-white select-none w-full shadow rounded-b drop-shadow-lg min-h-[50px] flex flex-row justify-between items-center max-[340px]:px-2 px-5 md:px-[5rem] xl:px-[14rem] 2xl:px-[450px]">
+    <header className="bg-primary text-white select-none w-full shadow rounded-b drop-shadow-lg min-h-[50px] py-3 flex flex-row justify-between items-center max-[340px]:px-2 px-5 md:px-[5rem] xl:px-[14rem] 2xl:px-[450px]">
       <div
         onClick={() => setHeaderOption("home")}
         className="text-2xl font-medium flex flex-col items-center hover:cursor-pointer text-center hover:opacity-80"
@@ -43,7 +43,7 @@ const Header = ({
             <span className="max-[600px]:hidden">Administração</span>
           </div>
           {adminOpen && (
-            <div className="absolute left-0 bg-white text-primary border rounded shadow-md font-medium">
+            <div className="absolute z-[10000] left-0 bg-white text-primary border rounded shadow-md font-medium">
               <div
                 className="px-4 py-2 hover:bg-gray-100 flex flex-row gap-2 hover:cursor-pointer"
                 onClick={() => setHeaderOption("estoque")}

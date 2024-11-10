@@ -24,7 +24,7 @@ const Login = () => {
     }
 
     return (<>
-        <div className="bg-primary/30 w-screen h-screen flex items-center justify-center">
+        <div className="bg-primary/60 w-screen h-screen flex items-center justify-center">
             <div className="flex items-center justify-center w-full h-full">
 
                 <div className="w-[350px] h-[400px] max-w-full max-h-full bg-white text-secondary select-none bg-opacity-90 rounded-lg drop-shadow-lg shadow-lg flex flex-col items-center justify-center px-2 py-4 slide-in">

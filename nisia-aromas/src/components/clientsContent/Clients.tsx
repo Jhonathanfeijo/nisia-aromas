@@ -2,13 +2,13 @@ import { Plus, Search, UserRoundPen, UserRoundPlus } from "lucide-react";
 import { useEffect, useState } from "react";
 import ModalAddClient from "./ModalAddClient";
 import { baseUrl } from "../../api/Api";
+import loading from "../../assets/gifs/loading.webp";
 
-interface IClient {
+export interface IClient {
   id?: number;
   nomeCliente: string;
   telefone: string;
   dataNascimento: string;
-  email: string;
   endereco: {
     rua: string;
     numero: string;
@@ -24,12 +24,13 @@ const Clients = () => {
   const [isAddClientOpen, setIsAddClientOpen] = useState(false);
   const [statusData, setStatusData] = useState<string>("loading");
   const [clients, setClients] = useState<IClient[]>();
+  const [clientFilter, setClientFilter] = useState<string>("");
 
   const headers: (keyof IClient)[] = ["nomeCliente", "telefone"];
 
   useEffect(() => {
     getClients();
-  }, []);
+  }, [clientFilter]);
 
   const getClients = async () => {
     setStatusData("loading");
@@ -37,7 +38,15 @@ const Clients = () => {
       .get("/cliente")
       .then((json) => {
         console.log("deu certo", json);
-        setClients(json.data);
+        let clientsFiltered = json.data;
+        if (clientsFiltered.length > 0)
+          clientsFiltered = clientsFiltered.filter((client: IClient) =>
+            clientFilter === ""
+              ? true
+              : client.nomeCliente &&
+                client.nomeCliente.toLowerCase() === clientFilter.toLowerCase()
+          );
+        setClients(clientsFiltered);
         setStatusData("sucess");
       })
       .catch((err) => {
@@ -53,20 +62,23 @@ const Clients = () => {
           Clientes
         </h2>
         <main className="flex-1 w-full flex flex-col items-center gap-4">
+          <div className="flex flex-row w-full sm:w-auto items-center border-2 justify-center px-4 rounded-full overflow-hidden">
+            <input
+              value={clientFilter}
+              onChange={(e) => setClientFilter(e.target.value)}
+              className="p-2 w-[400px]  max-w-full"
+              placeholder="Digite para pesquisar"
+              type="text"
+            />
+            <div className="text-primary">
+              <Search />
+            </div>
+          </div>
+          {statusData === "loading" && <img className="w-[200px]" src={loading}></img>}
           {statusData === "sucess" && (
             <>
               <div className="flex flex-row gap-3 w-full">
                 <div className="flex flex-row w-full justify-between items-center">
-                  <div className="flex flex-row items-center border-2 justify-center px-4 rounded-full overflow-hidden">
-                    <input
-                      className="p-2 w-[400px]"
-                      placeholder="Digite para pesquisar"
-                      type="text"
-                    />
-                    <div className="text-primary">
-                      <Search />
-                    </div>
-                  </div>
                   <div
                     onClick={() => setIsAddClientOpen(true)}
                     className="self-end"
@@ -85,9 +97,8 @@ const Clients = () => {
                   <thead className="w-full bg-primary text-white rounded overflow-hidden">
                     <tr>
                       <th></th>
-                      <th className="py-2">Nome</th>
-                      <th className="py-2">Telefone</th>
-                      <th className="py-2">Avaliação</th>
+                      <th className="py-2 text-left">Nome</th>
+                      <th className="py-2 text-left">Telefone</th>
                       <th></th>
                     </tr>
                   </thead>
@@ -97,14 +108,18 @@ const Clients = () => {
                         {clients.length > 0 && (
                           <>
                             {clients.map((client: IClient, index: number) => {
-                              console.log(client)
+                              console.log(client);
                               return (
                                 <tr key={client.id}>
                                   <td className="p-3">
                                     <span>{index + 1}</span>
                                   </td>
                                   {headers.map((header) => (
-                                    <td key={header}><span>{client[header] as string | number}</span></td>
+                                    <td key={header}>
+                                      <span>
+                                        {client[header] as string | number}
+                                      </span>
+                                    </td>
                                   ))}
                                   <td className="flex items-center justify-end p-2">
                                     <button className="bg-primary text-white px-2 py-1 rounded hover:opacity-80">
